@@ -17,9 +17,6 @@ export class ConfirmOrderComponent implements OnInit {
 
   ngOnInit() {
     this.order = this.orderSvc.getOrderDetails();
-    this.orderSvc.onConfirmOrder.subscribe((order: Order) => {
-      this.order = order;
-    });
   }
 
 }

@@ -12,7 +12,6 @@ export class OrderService {
   fiat = 'SGD';
   apiUrl = 'https://cors-anywhere.herokuapp.com/https://apiv2.bitcoinaverage.com/indices/global/ticker/all';
   order = new Order('','','',null,null,null,null, 0);
-  onConfirmOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
   constructor(private httpSvc: HttpClient) { }
 
@@ -25,8 +24,6 @@ export class OrderService {
     this.order.orderType = orderForm.get('orderType').value;
     this.order.units = orderForm.get('units').value;
     this.order.label = label;
-
-    this.onConfirmOrder.next(this.order);
   }
 
   getOrderDetails(){
