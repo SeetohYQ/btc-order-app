@@ -12,7 +12,7 @@ script:
   - ng build --prod --base-href https://seetohyq.github.io/btc-order-app/
 deploy:
   provider: pages
-  skip_cleanup: false
+  skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: dist/btc-order-app
   on:
