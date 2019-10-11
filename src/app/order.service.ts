@@ -10,7 +10,7 @@ export class OrderService {
 
   crypto = 'BTC';
   fiat = 'SGD';
-  apiUrl = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/all';
+  apiUrl = 'https://cors-anywhere.herokuapp.com/https://apiv2.bitcoinaverage.com/indices/global/ticker/all';
   order = new Order('','','',null,null,null,null, 0);
   onConfirmOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
