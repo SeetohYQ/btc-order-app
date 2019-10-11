@@ -55,7 +55,12 @@ export class OrderComponent implements OnInit {
         this.unitPrice = result.BTCSGD.bid;
       }
     }).catch((error) => {
-      console.log(error)
+      if (option === 'buy'){
+        this.unitPrice = 10000;
+      }
+      else{
+        this.unitPrice = 9000;
+      }
     })
     return this.unitPrice;
   }
