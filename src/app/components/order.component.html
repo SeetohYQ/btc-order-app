@@ -1,0 +1,82 @@
+<button mat-raised-button type="button" [routerLink]="['/order','confirm']">See Confirmed Order</button>
+<h2>Order Form</h2>
+<form [formGroup]="orderForm" (ngSubmit)="processOrder()" fxLayout="column">
+    <mat-form-field>
+        <input type ="text" matInput placeholder="Name" formControlName="name">
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('name', 'required')">Name cannot be empty</mat-error>
+        <mat-error *ngIf="hasError('name', 'pattern')">Alphabets only</mat-error>
+    </mat-form-field>
+
+    <div fxLayout = "row">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Phone Number" formControlName="phoneNumber">
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('phoneNumber', 'notSgNumber')">Not a valid Singapore number</mat-error>
+            <mat-error *ngIf="hasError('phoneNumber', 'wrongFirstDigit')">Does not start with 6, 8 or 9</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap ="1vw">
+        <mat-label fxLayoutAlign="center center">Gender</mat-label>
+        <mat-radio-group formControlName="gender" fxLayout="column" fxLayoutGap ="1vh">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker1" placeholder="Date of Birth" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('dob', 'required')">Date of birth cannot be empty</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="hasError('dob', 'ageRequirement')">Must be at least 21 years old</mat-error>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Order Date" formControlName="orderDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+        </mat-form-field>
+        <mat-error *ngIf="hasError('orderDate', 'orderDate')">Cannot be before today</mat-error>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <mat-select formControlName="orderType" (valueChange)="updatePayment()">
+                <mat-option value="buy">Buy</mat-option>
+                <mat-option value="sell">Sell</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <input matInput type="number" placeholder="Number of units" formControlName="units"
+            step="0.01" min = 0.001
+            (change)="updateTotal($event)">
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('units', 'invalidQtyError') || hasError('units', 'required')">Invalid quantity</mat-error>
+        </mat-form-field>
+        
+        <mat-label >Price (SGD/BTC): {{unitPrice | currency: 'SGD'}}</mat-label><br>
+        <mat-label>Total Price: {{ label | currency: 'SGD'}}</mat-label>
+    </div>
+
+    <div>
+        <span *ngIf="defaultOption === 'buy'">Your wallet address: {{yourWalletAddress}}</span>
+        <div *ngIf="defaultOption === 'sell'" >
+            <p>Your Paylah/Paynow QR Code</p>
+            <img src="/assets/my_qrcode.png"
+            class="resize-img">
+        </div>
+    </div>
+
+    <div>
+        <button mat-flat-button type="button" (click)="resetForm()">Reset</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!orderForm.valid">Submit Order</button>
+    </div>
+</form>

@@ -1,0 +1,42 @@
+<button mat-raised-button type="button" [routerLink]="'[/order]'">Back</button>
+
+<div *ngIf="order.orderType === 'buy'">
+    <h2>You BUY Order is Successful</h2>
+    <p>Custodian's Paylah/Paynow QR Code</p>
+    <img src="/assets/custodian_qrcode.png" class="resize-img">
+    <p>Once the SGD funds are wired across, we will send you the bitcoin to your wallet address.</p>
+    
+    <mat-card>
+        <mat-card-header fxLayout="column">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Order Details</mat-card-title>
+            <mat-card-subtitle>Name: {{order.name}}</mat-card-subtitle>
+            <mat-card-subtitle>Date of Birth: {{order.dob | date:'mediumDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>Order Date: {{order.orderDate | date:'mediumDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>Order Type: {{order.orderType}}</mat-card-subtitle>
+            <mat-card-subtitle>Contact Number: {{order.phoneNumber}}</mat-card-subtitle>
+            <mat-card-subtitle>Number of BTC units: {{order.units}}</mat-card-subtitle>
+            <mat-card-subtitle>Total: {{order.label}} </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<div *ngIf="order.orderType === 'sell'">
+    <h2>You SELL Order is Successful</h2>
+    <p>Custodian's wallet address: {{custodianWalletAddress}}</p>
+    <p>once the BTC are wired across, we will send you the SGD funds to your Paynow/Paylah bank account.</p>
+
+    <mat-card>
+        <mat-card-header fxLayout="column">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Order Details</mat-card-title>
+            <mat-card-subtitle>Name: {{order.name}}</mat-card-subtitle>
+            <mat-card-subtitle>Date of Birth: {{order.dob | date:'mediumDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>Order Date: {{order.orderDate | date:'mediumDate'}}</mat-card-subtitle>
+            <mat-card-subtitle>Order Type: {{order.orderType}}</mat-card-subtitle>
+            <mat-card-subtitle>Contact Number: {{order.phoneNumber}}</mat-card-subtitle>
+            <mat-card-subtitle>Number of BTC units: {{order.units}}</mat-card-subtitle>
+            <mat-card-subtitle>Total: {{order.label}} </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
