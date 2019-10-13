@@ -1,4 +1,6 @@
-<button mat-raised-button type="button" [routerLink]="'[/order]'">Back</button>
+<div fxLayout="row" fxLayoutAlign="end">
+    <button mat-raised-button type="button" [routerLink]="'[/order]'">Back</button>
+</div>
 
 <div *ngIf="order.orderType === 'buy'">
     <h2>You BUY Order is Successful</h2>
@@ -24,7 +26,7 @@
 <div *ngIf="order.orderType === 'sell'">
     <h2>You SELL Order is Successful</h2>
     <p>Custodian's wallet address: {{custodianWalletAddress}}</p>
-    <p>once the BTC are wired across, we will send you the SGD funds to your Paynow/Paylah bank account.</p>
+    <p>Once the BTC are wired across, we will send you the SGD funds to your Paynow/Paylah bank account.</p>
 
     <mat-card>
         <mat-card-header fxLayout="column">

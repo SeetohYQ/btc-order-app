@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class OrderComponent implements OnInit {
 
   orderForm: FormGroup;
-  label: number = 0;
-  unitPrice: number;
+  label: number;
+  unitPrice: number = 11180;
   todayDate = moment().startOf('day').toDate();
   defaultUnits = 0.001;
   yourWalletAddress = 'qdm5fwzztg95er9wndyl346l5yvkfx7rrrs0raq1cb'
@@ -22,9 +22,6 @@ export class OrderComponent implements OnInit {
   constructor(private orderSvc: OrderService, private router: Router) { }
 
   ngOnInit() {
-
-    this.label = this.unitPrice * this.defaultUnits;
-
     this.orderForm = new FormGroup({
       'name': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]),
       'phoneNumber': new FormControl(null, [Validators.required, this.validateSgNumber]),
@@ -50,16 +47,20 @@ export class OrderComponent implements OnInit {
     this.orderSvc.getBtcPrice().then((result) => {
       if (option === 'buy'){
         this.unitPrice = result.BTCSGD.ask;
+        this.label = this.orderForm.get('units').value * this.unitPrice;
       }
       else{
         this.unitPrice = result.BTCSGD.bid;
+        this.label = this.orderForm.get('units').value * this.unitPrice;
       }
     }).catch((error) => {
-      if (option === 'buy'){
-        this.unitPrice = 10000;
+      if (option === 'sell'){
+        this.unitPrice = 10180;
+        this.label = this.orderForm.get('units').value * this.unitPrice;
       }
-      else{
-        this.unitPrice = 9000;
+      else if (option === 'buy'){
+        this.unitPrice = 11180;
+        this.label = this.orderForm.get('units').value * this.unitPrice;
       }
     })
     return this.unitPrice;
@@ -70,19 +71,14 @@ export class OrderComponent implements OnInit {
   }
 
   updatePayment(){
-    if (this.defaultOption === 'buy'){
-      this.defaultOption = 'sell'
-      this.unitPrice = this.getBTCPrice(this.defaultOption);
-      this.label = this.orderForm.get('units').value * this.unitPrice;
-      console.log('sell')
-    }
-    else {
-      this.defaultOption = 'buy'
-      this.unitPrice = this.getBTCPrice(this.defaultOption);
-      this.label = this.orderForm.get('units').value * this.unitPrice;
-      console.log('buy')
-    }
+    this.defaultOption = this.orderForm.get('orderType').value; 
+    this.unitPrice = this.getBTCPrice(this.defaultOption);
+
+    // setTimeout(()=>{  
+    //   console.log(this.unitPrice)
+    // },2000)
   }
+
   resetForm(){
     this.orderForm.reset();
     this.orderForm.patchValue({
