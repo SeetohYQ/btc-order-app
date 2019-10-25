@@ -5,7 +5,7 @@ dist: bionic
 sudo: required
 branches:
   only:
-   - master
+   - day14-server
 before_script:
   - npm install -g @angular/cli
 script:
@@ -16,4 +16,4 @@ deploy:
   github_token: $GITHUB_TOKEN
   local_dir: dist/btc-order-app
   on:
-    branch: master
+    branch: day14-server

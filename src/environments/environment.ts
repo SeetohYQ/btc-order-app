@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  SERVER_URI: 'http://localhost:3000/api/'
+  SERVER_URI: 'https://afternoon-waters-51365.herokuapp.com/api/'
 };
 
 /*
