@@ -41,7 +41,7 @@
     <div fxLayout="row">
         <mat-form-field>
             <input matInput type="number" placeholder="Number of units" formControlName="units" step="0.01" min=0.001
-                (change)="updateTotal($event)">
+                (change)="updateTotal()">
             <mat-hint align="end">* Mandatory field.</mat-hint>
             <mat-error *ngIf="hasError('units', 'invalidQtyError') || hasError('units', 'required')">Invalid quantity
             </mat-error>
