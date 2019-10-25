@@ -40,7 +40,7 @@ export class EditOrderComponent implements OnInit {
       this.editOrderForm.get('phoneNumber').setValue(this.order.phoneNumber);
       this.editOrderForm.get('gender').setValue(this.order.gender);
       this.editOrderForm.get('dob').setValue(new Date(this.order.dob));
-      this.editOrderForm.get('orderDate').setValue(new Date(this.order.dob));
+      this.editOrderForm.get('orderDate').setValue(new Date(this.order.orderDate));
       this.editOrderForm.get('orderType').setValue(this.order.orderType);
       this.editOrderForm.get('units').setValue(this.order.units);
       this.label = this.order.label;
