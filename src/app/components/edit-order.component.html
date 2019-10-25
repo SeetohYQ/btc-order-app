@@ -1,0 +1,55 @@
+<h2>Edit Order</h2>
+<form [formGroup]="editOrderForm" (ngSubmit)="processUpdate()" fxLayout="column">
+    <mat-form-field>
+        <input type="text" matInput placeholder="Name" formControlName="name">
+        <mat-hint align="end">* Mandatory field.</mat-hint>
+        <mat-error *ngIf="hasError('name', 'required')">Name cannot be empty</mat-error>
+        <mat-error *ngIf="hasError('name', 'pattern')">Alphabets only</mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Phone Number" formControlName="phoneNumber">
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('phoneNumber', 'notSgNumber')">Not a valid Singapore number</mat-error>
+            <mat-error *ngIf="hasError('phoneNumber', 'wrongFirstDigit')">Does not start with 6, 8 or 9</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="1vw">
+        <mat-label fxLayoutAlign="center center">Gender</mat-label>
+        <mat-radio-group formControlName="gender" fxLayout="column" fxLayoutGap="1vh">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker1" placeholder="Date of Birth" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('dob', 'required')">Date of birth cannot be empty</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="hasError('dob', 'ageRequirement')">Must be at least 21 years old</mat-error>
+    </div>
+
+    <mat-label>Order Date: {{ editOrderForm.get('orderDate').value | date: 'mediumDate'}}</mat-label>
+    <mat-label>Order Type: {{ editOrderForm.get('orderType').value}}</mat-label>
+    <mat-label>Price (SGD/BTC): {{ originalUnitPrice | currency: 'SGD'}}</mat-label><br>
+    <div fxLayout="row">
+        <mat-form-field>
+            <input matInput type="number" placeholder="Number of units" formControlName="units" step="0.01" min=0.001
+                (change)="updateTotal($event)">
+            <mat-hint align="end">* Mandatory field.</mat-hint>
+            <mat-error *ngIf="hasError('units', 'invalidQtyError') || hasError('units', 'required')">Invalid quantity
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <mat-label>Total Price: {{ label | currency: 'SGD'}}</mat-label>
+
+    <div fxKLayout="row" fxLayoutAlign="center" fxLayoutGap="2vw">
+        <button mat-flat-button color="primary" type="submit">Save Updates</button>
+    </div>
+</form>

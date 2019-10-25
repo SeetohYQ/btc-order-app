@@ -11,12 +11,14 @@ import { ConfirmOrderComponent } from './components/confirm-order.component';
 import { OrderService } from './order.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { EditOrderComponent } from './components/edit-order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderComponent,
-    ConfirmOrderComponent
+    ConfirmOrderComponent,
+    EditOrderComponent
   ],
   imports: [
     HttpClientModule,

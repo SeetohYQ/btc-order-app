@@ -11,12 +11,22 @@ import { Router } from '@angular/router';
 export class ConfirmOrderComponent implements OnInit {
 
   order: Order;
+  orders: Order[];
   custodianWalletAddress = 'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq';
 
   constructor(private orderSvc: OrderService, private router: Router) { }
 
   ngOnInit() {
     this.order = this.orderSvc.getOrderDetails();
-  }
+    
+    this.orderSvc.getOrders().subscribe((responseData) => {
+      this.orders = responseData['orders'];
+    })
 
+    this.orderSvc.onAdd.subscribe(() => {
+      this.orderSvc.getOrders().subscribe((responseData) => {
+        this.orders = responseData['orders'];
+      })
+    })
+  }
 }

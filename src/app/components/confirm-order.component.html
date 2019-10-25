@@ -42,3 +42,9 @@
         </mat-card-header>
     </mat-card>
 </div>
+<h2>Past Transactions</h2>
+<div>
+    <mat-action-list *ngFor="let order of orders; let i = index">
+        <button mat-list-item [routerLink]="['/order/',i]">Transaction ID {{i}}; Created on: {{order.orderDate | date:'mediumDate'}}</button>
+    </mat-action-list>
+</div>

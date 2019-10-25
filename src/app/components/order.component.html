@@ -4,13 +4,13 @@
 <h2>Order Form</h2>
 <form [formGroup]="orderForm" (ngSubmit)="processOrder()" fxLayout="column">
     <mat-form-field>
-        <input type ="text" matInput placeholder="Name" formControlName="name">
+        <input type="text" matInput placeholder="Name" formControlName="name">
         <mat-hint align="end">* Mandatory field.</mat-hint>
         <mat-error *ngIf="hasError('name', 'required')">Name cannot be empty</mat-error>
         <mat-error *ngIf="hasError('name', 'pattern')">Alphabets only</mat-error>
     </mat-form-field>
 
-    <div fxLayout = "row">
+    <div fxLayout="row">
         <mat-form-field>
             <input matInput type="text" placeholder="Phone Number" formControlName="phoneNumber">
             <mat-hint align="end">* Mandatory field.</mat-hint>
@@ -19,9 +19,9 @@
         </mat-form-field>
     </div>
 
-    <div fxLayout="row" fxLayoutGap ="1vw">
+    <div fxLayout="row" fxLayoutGap="1vw">
         <mat-label fxLayoutAlign="center center">Gender</mat-label>
-        <mat-radio-group formControlName="gender" fxLayout="column" fxLayoutGap ="1vh">
+        <mat-radio-group formControlName="gender" fxLayout="column" fxLayoutGap="1vh">
             <mat-radio-button value="male">Male</mat-radio-button>
             <mat-radio-button value="female">Female</mat-radio-button>
         </mat-radio-group>
@@ -55,29 +55,29 @@
                 <mat-option value="sell">Sell</mat-option>
             </mat-select>
         </mat-form-field>
-    
+
         <mat-form-field>
-            <input matInput type="number" placeholder="Number of units" formControlName="units"
-            step="0.01" min = 0.001
-            (change)="updateTotal($event)">
+            <input matInput type="number" placeholder="Number of units" formControlName="units" step="0.01" min=0.001
+                (change)="updateTotal($event)">
             <mat-hint align="end">* Mandatory field.</mat-hint>
-            <mat-error *ngIf="hasError('units', 'invalidQtyError') || hasError('units', 'required')">Invalid quantity</mat-error>
+            <mat-error *ngIf="hasError('units', 'invalidQtyError') || hasError('units', 'required')">Invalid quantity
+            </mat-error>
         </mat-form-field>
-        
-        <mat-label >Price (SGD/BTC): {{ unitPrice | currency: 'SGD'}}</mat-label><br>
+
+        <mat-label>Price (SGD/BTC): {{ unitPrice | currency: 'SGD'}}</mat-label><br>
         <mat-label>Total Price: {{ label | currency: 'SGD'}}</mat-label>
     </div>
 
-    <div  style="display:block; margin-bottom: 30px">
+    <div style="display:block; margin-bottom: 30px">
         <span *ngIf="defaultOption === 'buy'">Your wallet address: {{yourWalletAddress}}</span>
-        <div *ngIf="defaultOption === 'sell'" >
+        <div *ngIf="defaultOption === 'sell'">
             <p>Your Paylah/Paynow QR Code</p>
             <img src="https://previews.123rf.com/images/flik47/flik471405/flik47140500375/28365481-light-red-abstract-qr-code-texture-background.jpg"
-            class="resize-img">
+                class="resize-img">
         </div>
     </div>
 
-    <div fxKLayout="row" fxLayoutAlign ="center" fxLayoutGap="2vw">
+    <div fxKLayout="row" fxLayoutAlign="center" fxLayoutGap="2vw">
         <button mat-flat-button type="button" (click)="resetForm()">Reset</button>
         <button mat-flat-button color="primary" type="submit" [disabled]="!orderForm.valid">Submit Order</button>
     </div>
