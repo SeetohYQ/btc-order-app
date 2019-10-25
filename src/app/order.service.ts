@@ -10,7 +10,7 @@ import { environment } from './../environments/environment'
 export class OrderService {
 
   order = new Order('', '', '', null, null, null, null, 0);
-  serverUrl = environment.SERVER_URI;
+  serverUrl = 'https://afternoon-waters-51365.herokuapp.com/api/';
   onAdd = new EventEmitter<void>();
 
   constructor(private httpSvc: HttpClient) { }

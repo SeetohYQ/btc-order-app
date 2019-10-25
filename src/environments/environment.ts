@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  SERVER_URI: 'https://afternoon-waters-51365.herokuapp.com/api/'
 };
 
 /*
