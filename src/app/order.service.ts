@@ -66,7 +66,7 @@ export class OrderService {
   }
 
   getOrders() {
-    return this.httpSvc.get<{string: Order[]}>(this.serverUrl + 'order/');
+    return this.httpSvc.get<{orders: Order[]}>(this.serverUrl + 'order/');
   }
 
   getOrderDetails() {
@@ -89,6 +89,6 @@ export class OrderService {
   }
 
   retrieveOrder(index: number) {  
-    return this.httpSvc.get<{string: Order}>(this.serverUrl + 'order/' + index.toString()).toPromise();
+    return this.httpSvc.get<{order: Order}>(this.serverUrl + 'order/' + index.toString()).toPromise();
   }
 }
